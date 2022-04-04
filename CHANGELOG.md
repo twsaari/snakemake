@@ -1,5 +1,12 @@
 # Changelog
 
+### [7.3.7](https://www.github.com/snakemake/snakemake/compare/v7.3.6...v7.3.7) (2022-04-04)
+
+
+### Bug Fixes
+
+* do not wrap whitespace in result info headers of reports ([653d0d0](https://www.github.com/snakemake/snakemake/commit/653d0d0b92d2556e0fa04a8208f37fd982dcb829))
+
 ### [7.3.6](https://www.github.com/snakemake/snakemake/compare/v7.3.5...v7.3.6) (2022-04-02)
 
 
