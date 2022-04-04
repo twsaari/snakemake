@@ -2,7 +2,7 @@ __author__ = "Johannes Köster"
 __copyright__ = "Copyright 2022, Johannes Köster"
 __email__ = "johannes.koester@uni-due.de"
 __license__ = "MIT"
-
+import pdb
 from abc import abstractmethod
 import os
 import sys
@@ -496,12 +496,15 @@ class CPUExecutor(RealExecutor):
         container_img = (
             job.container_img_path if self.workflow.use_singularity else None
         )
+        container_bind = (
+            job.container_bind if self.workflow.use_singularity else None
+        )
         env_modules = job.env_modules if self.workflow.use_env_modules else None
-
         benchmark = None
         benchmark_repeats = job.benchmark_repeats or 1
         if job.benchmark is not None:
             benchmark = str(job.benchmark)
+        pdb.set_trace()
         return (
             job.rule,
             job.input._plainstrings(),
@@ -515,6 +518,7 @@ class CPUExecutor(RealExecutor):
             benchmark_repeats,
             conda_env,
             container_img,
+            container_bind,
             self.workflow.singularity_args,
             env_modules,
             self.workflow.use_singularity,

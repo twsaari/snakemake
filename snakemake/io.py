@@ -1082,6 +1082,11 @@ def checkpoint_target(value):
     return flag(value, "checkpoint_target")
 
 
+def image(value, bind):
+    """Flag containers with bind-mount information"""
+    return flag(value, bind)
+
+
 ReportObject = collections.namedtuple(
     "ReportObject",
     ["caption", "category", "subcategory", "labels", "patterns", "htmlindex"],

@@ -2,7 +2,7 @@ __author__ = "Johannes Köster"
 __copyright__ = "Copyright 2022, Johannes Köster"
 __email__ = "johannes.koester@uni-due.de"
 __license__ = "MIT"
-
+import pdb
 import os
 import sys
 import base64
@@ -311,6 +311,7 @@ class Job(AbstractJob):
     @property
     def benchmark_repeats(self):
         if self.benchmark is not None:
+            #pdb.set_trace()
             return get_flag_value(self.benchmark, "repeat") or 1
 
     @property
@@ -400,6 +401,11 @@ class Job(AbstractJob):
     @property
     def container_img_path(self):
         return self.container_img.path if self.container_img else None
+
+    @property
+    def container_bind(self):
+        if self.container_img:
+            return get_flag_value(self.container_img, "bind")
 
     @property
     def is_shadow(self):

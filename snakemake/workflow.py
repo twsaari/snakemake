@@ -53,6 +53,7 @@ from snakemake.io import (
     pipe,
     service,
     repeat,
+    image,
     report,
     multiext,
     IOFile,
