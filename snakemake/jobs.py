@@ -2,7 +2,7 @@ __author__ = "Johannes Köster"
 __copyright__ = "Copyright 2022, Johannes Köster"
 __email__ = "johannes.koester@uni-due.de"
 __license__ = "MIT"
-import pdb
+
 import os
 import sys
 import base64
@@ -311,7 +311,6 @@ class Job(AbstractJob):
     @property
     def benchmark_repeats(self):
         if self.benchmark is not None:
-            #pdb.set_trace()
             return get_flag_value(self.benchmark, "repeat") or 1
 
     @property
@@ -403,9 +402,8 @@ class Job(AbstractJob):
         return self.container_img.path if self.container_img else None
 
     @property
-    def container_bind(self):
-        if self.container_img:
-            return get_flag_value(self.container_img, "bind")
+    def addtl_singularity_args(self):
+        return get_flag_value(self.container_img_url, "singularity_args") if self.container_img_url else None
 
     @property
     def is_shadow(self):
@@ -1043,6 +1041,12 @@ class Job(AbstractJob):
             # hence we don't need to wait for them.
             wait_for_files.append(self.conda_env.address)
         return wait_for_files
+
+    def get_singularity_args(self):
+        general_args = self.dag.workflow.singularity_args
+        job_specific_args = self.addtl_singularity_args or "" # Empty string if None
+        # Returns empty string if both empty, combined if both assigned, or assigned if only one
+        return " ".join([general_args, job_specific_args]).strip()
 
     @property
     def jobid(self):

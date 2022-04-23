@@ -1082,9 +1082,9 @@ def checkpoint_target(value):
     return flag(value, "checkpoint_target")
 
 
-def image(value, bind):
-    """Flag containers with bind-mount information"""
-    return flag(value, bind)
+def image(value, singularity_args):
+    """Flag containers with additional singularity argument string"""
+    return flag(value, "singularity_args", singularity_args)
 
 
 ReportObject = collections.namedtuple(
